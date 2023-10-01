@@ -4,6 +4,7 @@ import Card from '../Ui/Card'
 import CartContext from '../../Store/Cartcontext'
 import Cartitem from './Cartitem'
 import Checkout from './Checkout'
+import {motion} from 'framer-motion'
 
 function Cart(props) {
  const  [ischeckout , setisCheckout] = useState(false)
@@ -37,13 +38,15 @@ function Cart(props) {
   </div>
 
 
-const submitOrderHandler =  (userData) => {
-  fetch('https://meals-973e4-default-rtdb.firebaseio.com/provides.json', {
+  const submitOrderHandler = (userData) => {
+    console.log(JSON.stringify({...userData}))
+  fetch('http://127.0.0.1:8000/checkout/', {
     method: "POST",
-    body: JSON.stringify({
-      user: userData,
-      orderItems: CartContext.items
-    })
+    headers: {
+      "Content-Type": "application/json"
+    },
+    header: "application/json",
+    body: JSON.stringify({ ...userData })
   })
  
 }
@@ -51,7 +54,7 @@ const submitOrderHandler =  (userData) => {
 
   return (
     <Modal>
-      <div className='flex w-[60%] space-y-5 lg:w-[40%] lg:px-[30px] lg:[40%] p-3 rounded-xl  flex-col relative  bg-white '>
+      <motion.div exit={{y:-12,opacity:0}} animate={{y:12}} className='flex container md:w-[60%] space-y-5 lg:w-[40%] lg:px-[30px] lg:[40%] p-3 rounded-xl top-12 flex-col absolute  bg-white '>
         <div className='font-semibold text-lg max-h-[24rem] overflow-y-scroll'>
           <ul>
             {ctx.items.map((item) => (
@@ -68,7 +71,7 @@ const submitOrderHandler =  (userData) => {
         { ischeckout && <Checkout onConfirm={submitOrderHandler} onhide={props.onHidecart}/>}
         {!ischeckout && modalActions  }
        
-      </div>
+      </motion.div>
     </Modal>
   )
 }

@@ -3,8 +3,3 @@
 @tailwind utilities;
 
 
-@layer {
-  body {
-  @apply bg-zinc-800
-  }
-}

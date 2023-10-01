@@ -1,7 +1,4 @@
 import React from 'react'
-import ReactDOM  from 'react'
-
-
 
 export const Modal = (props) => {
   return (

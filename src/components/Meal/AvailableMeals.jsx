@@ -13,32 +13,30 @@ const AvailableMeals = () => {
         const handleFetch = async () => {
 
             const product  = await fetch('https://meals-973e4-default-rtdb.firebaseio.com/Meals.json')
+            
 
             if (!product.ok) {
                 throw new Error("Something went wrong")
             }
-            const response = await product.json()
+            const  response = await product.json()
+            console.log(response)
+            const Meal = []
 
+           const Meals = []
 
-            const Meals = []
+for (const key in response) {
+  Meals.push({
+    id: key,
+    name: response[key].name,
+    description: response[key].description,
+    price: response[key].price
+  })
+}
 
-            for (const key in response) {
-                Meals.push({
-                    id:key , 
-                    name: response[key].name ,
-                    description: response[key].description,
-                    price: response[key].price
-                })
-
-            }
-
-            setmeals(Meals)
-            setLodaing(false)
+setmeals(Meals)
+setLodaing(false)
 
         }
-
-
-
             handleFetch().catch(error => {
                 setLodaing(false)
                 setError(error.message)
@@ -48,7 +46,7 @@ const AvailableMeals = () => {
     }, [])
 
 
-    const measList = meals.map(meals =>
+    const measList = meals?.map(meals =>
         <MealItem key={meals.id} name={meals.name} id={meals.id} describe={meals.description} price={meals.price}></MealItem>)
     return (
         <>

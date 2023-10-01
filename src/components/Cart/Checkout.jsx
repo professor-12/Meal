@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { useRef } from 'react'
 
 const Checkout = (props) => {
@@ -26,9 +25,9 @@ const Checkout = (props) => {
 
             props.onConfirm({
                 name:enteredName,
-                stree:enteredstreet,
+                street:enteredstreet,
                 city:entereaddress ,
-                postalcode:enteredpostalcode
+                postalCode:enteredpostalcode
             })
 
 
