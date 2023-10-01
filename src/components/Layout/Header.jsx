@@ -13,7 +13,7 @@ const Header = props => {
   return (
     <>
       <div className='bg-red-800'>
-        <nav className='mx-auto p-6 bg-red-800 container flex w-[80%] justify-between'>
+        <nav className='mx-auto p-6 bg-red-800 container flex md:w-[80%] justify-between'>
           <h1 className=' text-white font-semibold text-3xl'>AfroMeals</h1>
           <HeaderCartButton onClick={props.onShowcart}></HeaderCartButton>
           <motion.div whileTap={{scale:1.4}} onClick={()=> {toggle(mode)}}  className='absolute right-5 rounded-xl p-2 cursor-wait text-white font-medium  text-sm  bg-black'> { mode }</motion.div>
